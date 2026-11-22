@@ -40,14 +40,21 @@ final user = FirebaseAuth.instance.currentUser;
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-      backgroundColor: Colors.black,
-      body: Center(
-        child: Text(
-          'Welcome to the App',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 24,
+    return Scaffold(
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: NetworkImage('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4sXntyq-T1iXCwlPZnSlxRx25f4JnkdpO5MHq2qiT1g&s=10'),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: const Center(
+          child: Text(
+            'Welcome To My App',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 24,
+            ),
           ),
         ),
       ),

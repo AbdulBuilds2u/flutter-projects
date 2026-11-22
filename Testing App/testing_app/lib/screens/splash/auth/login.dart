@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'homescreen.dart';
+
 
 
 
@@ -20,6 +20,7 @@ class _LoginscreenState extends State<Loginscreen> {
 
   bool _isSignUp = false;
   bool _isLoading = false;
+  bool _isPasswordVisible = false;
 
   Future<void> _submit() async {
     final email = _emailController.text.trim();
@@ -86,13 +87,20 @@ class _LoginscreenState extends State<Loginscreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(_isSignUp ? 'Create Account' : 'Sign In'),
+        backgroundColor: Colors.black,
+        title: Text(
+          _isSignUp ? 'Create Account' : 'Sign In',
+          style: const TextStyle(color: Colors.white, fontSize: 20,fontWeight: FontWeight.bold),
+        ),
+        centerTitle: true,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
+      body: Container(
+        color: Colors.white,
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
             TextField(
               controller: _emailController,
               decoration: const InputDecoration(
@@ -105,13 +113,25 @@ class _LoginscreenState extends State<Loginscreen> {
             const SizedBox(height: 12),
 
             TextField(
-              controller: _passwordController,
-              decoration: const InputDecoration(
-                labelText: 'Password',
-                border: OutlineInputBorder(),
-              ),
-              obscureText: true,
-            ),
+  controller: _passwordController,
+  decoration: InputDecoration(
+    labelText: 'Password',
+    border: const OutlineInputBorder(),
+    suffixIcon: IconButton(
+      icon: Icon(
+        _isPasswordVisible
+            ? Icons.visibility
+            : Icons.visibility_off,
+      ),
+      onPressed: () {
+        setState(() {
+          _isPasswordVisible = !_isPasswordVisible;
+        });
+      },
+    ),
+  ),
+  obscureText: !_isPasswordVisible,
+),
 
             const SizedBox(height: 20),
 
@@ -138,6 +158,7 @@ class _LoginscreenState extends State<Loginscreen> {
             ],
           ],
         ),
+      ),
       ),
     );
   }
